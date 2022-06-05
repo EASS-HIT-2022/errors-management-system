@@ -22,7 +22,7 @@ def app(data):
         error_name = st.text_input('Error name (submitting without error name will show all the errors):')
         submitted = st.form_submit_button("Submit")
         if submitted:
-            data = fetch(session, f"http://localhost:8000/api/v1/errors/{error_name}")
+            data = fetch(session, f"http://backend:8000/api/v1/errors/{error_name}")
             #st.write(data['name'])
             if error_name == '':
                 if len(data) == 0:
