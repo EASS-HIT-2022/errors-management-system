@@ -1,9 +1,9 @@
 FROM python:3.10
-COPY . /projects
-WORKDIR /projects/app
+WORKDIR /app
+COPY requirements.txt ./requirements.txt
 RUN pip3 install -r requirements.txt
-CMD ["pytest", "test_main.py"]
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8501
+COPY . /app
+ENTRYPOINT ["streamlit", "run"]
 
-streamlit run app.py --server.port 8080
-uvicorn main:app --reload
+CMD ["app.py"]
