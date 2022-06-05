@@ -37,7 +37,7 @@ def app(data):
                     "accept_date": accepted_date.isoformat()
                 }
 
-                API_URL = "http://localhost:8000/api/v1/errors"
+                API_URL = "http://backend:8000/api/v1/errors"
 
                 result_for_insert = requests.post(API_URL,json=input_error) 
                 response_data = result_for_insert.json()

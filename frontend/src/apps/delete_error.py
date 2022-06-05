@@ -14,7 +14,7 @@ def app(data):
     with remove_error_form:
         error_name = st.text_input('Error name (submitting without error name will show all the errors):')
         submitted = st.form_submit_button("Submit")
-        directed_url = f"http://localhost:8000/api/v1/errors/{error_name}"
+        directed_url = f"http://backend:8000/api/v1/errors/{error_name}"
 
         if submitted:
             response = requests.delete(directed_url)

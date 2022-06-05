@@ -49,7 +49,7 @@ def app(data):
             if error_name == '':
                 st.warning('You have to fill the error name that you want to change')
             else:
-                API_URL = f"http://localhost:8000/api/v1/errors/${error_name}"
+                API_URL = f"http://backend:8000/api/v1/errors/${error_name}"
                 result_for_insert = requests.put(API_URL,data=input_error) 
                 #result_for_insert.json
                 if(result_for_insert.status_code == 200):
