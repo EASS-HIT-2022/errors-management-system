@@ -8,5 +8,13 @@ services:
     build: ./frontend
     ports:
       - 8501:8501
-
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - /errors-management-system:/data/db
     
