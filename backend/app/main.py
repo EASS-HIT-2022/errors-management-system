@@ -90,10 +90,13 @@ async def register_error(new_error: Error):
 
 @app.delete("/api/v1/errors/{error_name}")
 async def delete_error(error_name: str):
-    for error in db:
-        if error.name == error_name:
-            db.remove(error)
-            return {f"error {error_name}":"removed successfully"}
+    #for error in db:
+    #    if error.name == error_name:
+    #if (collection_name > 0):
+    if 'name' in collection_name.find_one({'name': error_name}).keys():
+        collection_name.delete_many({"name": error_name})
+            #db.remove(error)
+        return {f"error {error_name}":"removed successfully"}
     raise HTTPException(
         status_code=404,
         detail=f"error called {error_name} does not found"

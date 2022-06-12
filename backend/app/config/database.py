@@ -33,11 +33,14 @@ errors_list = [
     second_error
 ]
 
-config_list =  []
+'''config_list =  []
 
-for error in errors_list:
-    already_exist = collection_name.find_one({"name": dict(error)["name"]})
-    if len(already_exist) > 0:
-        config_list.append(dict(error))
+cur = collection_name.find()
+
+result = list(cur)
+
+if len(result) == 0:
+        #for error in errors_list:
+        config_list.append(dict(errors_list))
         
-collection_name.insert_many(config_list)
+collection_name.insert_many(config_list)'''
