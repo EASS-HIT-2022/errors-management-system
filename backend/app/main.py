@@ -84,8 +84,12 @@ async def register_error(new_error: Error):
             )
     db.append(new_error)
     return {"id":new_error.id}'''
-    error = collection_name.insert_one(dict(new_error))
-    return {"id": error["_id"]}
+    #error = collection_name.insert_one(dict(new_error))
+    #return {"id": error["_id"]}
+    collection_name.insert_one(dict(new_error)) #last change
+    #return dumps(new_error)
+    return error_serializer(collection_name.find_one({"name": dict(new_error)["name"]}))
+
 
 
 @app.delete("/api/v1/errors/{error_name}")
