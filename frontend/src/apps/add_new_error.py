@@ -34,7 +34,8 @@ def app(data):
                     "priority": priority,
                     "involved": involved,
                     "next_step": next_step,
-                    "accept_date": accepted_date.isoformat()
+                    "accept_date": accepted_date.strftime("%Y-%m-%dT%H:%M:%S")
+                    #"accept_date": accepted_date.isoformat()
                 }
 
                 API_URL = "http://backend:8000/api/v1/errors"
