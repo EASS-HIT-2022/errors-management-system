@@ -29,18 +29,9 @@ second_error = Error(
         )
 
 errors_list = [
-    first_error,
-    second_error
+    dict(first_error),
+    dict(second_error)
 ]
 
-'''config_list =  []
-
-cur = collection_name.find()
-
-result = list(cur)
-
-if len(result) == 0:
-        #for error in errors_list:
-        config_list.append(dict(errors_list))
-        
-collection_name.insert_many(config_list)'''
+if collection_name.find() == None:
+        collection_name.insert_many(errors_list)
