@@ -14,8 +14,8 @@ def app(data):
         st.title('Errors Management System')
 
     with user_detail:
-        st.subheader('Hello David Rimon')
-        st.write('if you want to live check out the [David home page](https://www.google.com)')
+        st.subheader('Hello User')
+        #st.write('if you want to live check out the [David home page](https://www.google.com)')
 
     with new_error_form:
         error_name = st.text_input('Error name:')
@@ -43,14 +43,14 @@ def app(data):
                 result_for_insert = requests.post(API_URL,json=input_error) 
                 response_data = result_for_insert.json()
                 
-                if("id" in response_data):
+                if(result_for_insert.status_code == 200):
                     st.success(error_name + " - created successfully!")
                     st.write("The priority is: ", priority)
                     st.write("These are the involved when the error was raised: ", involved)
                     st.write("What you should do next: ", next_step)
                     st.write("The accepted date: ", accepted_date)
                 else:
-                    st.write(response_data)
+                    st.warning(response_data['detail'])
                 
 
 
