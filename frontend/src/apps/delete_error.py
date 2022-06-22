@@ -12,7 +12,7 @@ def app(data):
         st.title('Errors Management System')
 
     with remove_error_form:
-        error_name = st.text_input('Error name (submitting without error name will show all the errors):')
+        error_name = st.text_input('Error name:')
         submitted = st.form_submit_button("Submit")
         directed_url = f"http://backend:8000/api/v1/errors/{error_name}"
 
@@ -26,14 +26,3 @@ def app(data):
                     st.warning(f"{error_name} doesn't exist already")
                 else:
                     st.success(error_name + " - removed!")
-
-                    # print the complete data at once
-                    #st.write(data)
-                    
-                    # print each param 
-                    '''
-                    st.write("The priority is: ", data['priority'])
-                    st.write("These are the involved when the error was raised: ", data['involved'])
-                    st.write("What you should do next: ", data['next_step'])
-                    st.write("The accepted date: ", data['accept_date'])                    
-                    '''

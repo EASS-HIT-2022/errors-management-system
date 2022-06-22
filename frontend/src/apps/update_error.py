@@ -5,6 +5,7 @@ from distutils.log import error
 from sqlite3 import Date
 import streamlit as st 
 import requests
+from requests.structures import CaseInsensitiveDict
 
 import json
 import time
@@ -20,17 +21,14 @@ def app(data):
         st.title('Errors Management System')
 
     with user_detail:
-        st.subheader('Hello David Rimon')
-        st.write('if you want to live check out the [David home page](https://www.google.com)')
+        st.subheader('Hello User')
+        #st.write('if you want to live check out the [David home page](https://www.google.com)')
 
     with update_error_form:
         input_error = {}
 
         error_name = st.text_input('error name for update:')
-
-        '''error_name = st.text_input("New error name")
-        if error_name != "":
-            input_error['name'] = error_name'''
+        input_error['name'] = error_name
 
         priority= st.radio("Priority:",('Low','Medium','High','Blocker'))
         if priority != "":
@@ -42,15 +40,18 @@ def app(data):
 
         submitted = st.form_submit_button("Submit")        
         updated_date = date.today()
-        d1 = updated_date.strftime("%Y-%m-%d")
-        input_error['update_date'] = d1
+        normal_date = updated_date.strftime("%Y-%m-%dT00:00:00")
+        input_error['update_date'] = normal_date
 
         if submitted:
             if error_name == '':
                 st.warning('You have to fill the error name that you want to change')
             else:
-                API_URL = f"http://backend:8000/api/v1/errors/${error_name}"
-                result_for_insert = requests.put(API_URL,data=input_error) 
+                st.write(input_error)
+                API_URL = f"http://backend:8000/api/v1/errors/{error_name}"
+                headers = CaseInsensitiveDict()
+                headers["Content-Type"] = "application/json"
+                result_for_insert = requests.put(API_URL, headers=headers, data=input_error) 
                 #result_for_insert.json
                 if(result_for_insert.status_code == 200):
                     st.success(error_name + " - updated successfully!")
@@ -59,7 +60,7 @@ def app(data):
                     st.write("What you should do next: ", next_step)
                     #st.write("The accepted date: ", accepted_date)
                 else:
-                    st.write(result_for_insert)
+                    st.write(result_for_insert.json)
                     st.write(input_error)
 
             
