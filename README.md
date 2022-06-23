@@ -16,6 +16,7 @@ How to run the project?
 6. On the left side, you can see a nav bar with three actions: Add a new error, fetch error and delete error. By tying the error name, you can manage the history of the errors you noticed. 
 7. when you finished with the application you can close the server by: "Ctrl+C". 
 
+The next video can illustrate how to run the application:
 https://user-images.githubusercontent.com/86151424/175379676-725cef42-c707-486a-a6f5-609d4f1bb5be.mp4
 
 
